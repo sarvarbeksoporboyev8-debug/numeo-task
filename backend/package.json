@@ -1,0 +1,1 @@
+{\n  "name": "numeo-task",\n  "version": "1.0.0",\n  "description": "A task for learning purposes with Node.js, Express, Socket.io, and WebSocket.",\n  "main": "index.js",\n  "scripts": {\n    "start": "node index.js"\n  },\n  "dependencies": {\n    "express": "^4.17.1",\n    "socket.io": "^4.0.0",\n    "ws": "^7.0.0"\n  }\n}
