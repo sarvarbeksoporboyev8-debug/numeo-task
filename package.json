@@ -1,1 +1,18 @@
-{\n  "name": "numeo-task",\n  "private": true,\n  "workspaces": [\n    "packages/*"\n  ],\n  "scripts": {\n    "build": "webpack --mode production",\n    "test": "jest"\n  },\n  "devDependencies": {\n    "webpack": "^5.0.0",\n    "jest": "^27.0.0"\n  }\n}
+{
+  "name": "numeo-task",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Voice translation app with DeepSeek and Whisper",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\"",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
