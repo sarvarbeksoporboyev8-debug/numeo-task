@@ -1,0 +1,1 @@
+{\n  "name": "numeo-task",\n  "private": true,\n  "workspaces": [\n    "packages/*"\n  ],\n  "scripts": {\n    "build": "webpack --mode production",\n    "test": "jest"\n  },\n  "devDependencies": {\n    "webpack": "^5.0.0",\n    "jest": "^27.0.0"\n  }\n}
