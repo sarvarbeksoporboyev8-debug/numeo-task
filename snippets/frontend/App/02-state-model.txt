@@ -1,0 +1,6 @@
+const [isRecording, setIsRecording] = useState(false);
+const [transcribedText, setTranscribedText] = useState('');
+const [translatedText, setTranslatedText] = useState('');
+const [selectedLanguage, setSelectedLanguage] = useState('es');
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState<string | null>(null);
