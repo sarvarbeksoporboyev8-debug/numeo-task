@@ -1,0 +1,14 @@
+const handleStartRecording = () => {
+  setIsRecording(true);
+  setError(null);
+  console.log('Recording started');
+};
+
+const handleStopRecording = () => {
+  setIsRecording(false);
+  console.log('Recording stopped');
+};
+
+const handleLanguageChange = (lang: string) => {
+  setSelectedLanguage(lang);
+};
