@@ -1,0 +1,13 @@
+{error && <div className="error-message">{error}</div>}
+{isLoading && <div className="loading-message">Translating...</div>}
+
+<div className="results-section">
+  <div className="transcription">
+    <h2>Transcribed Text</h2>
+    <p>{transcribedText || 'No text yet'}</p>
+  </div>
+  <div className="translation">
+    <h2>Translated Text</h2>
+    <p>{translatedText || 'Translation pending'}</p>
+  </div>
+</div>
