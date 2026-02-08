@@ -1,0 +1,14 @@
+// Refactor: Extract handler logic to separate function
+const handleTranslationRequest = async () => {
+  if (!transcribedText) return;
+  
+  setError(null);
+  await fetchTranslation(transcribedText);
+};
+
+// Refactor: Simplify state updates
+const resetTranslation = () => {
+  setTranscribedText('');
+  setTranslatedText('');
+  setError(null);
+};
