@@ -1,0 +1,11 @@
+const handleStopRecording = () => {
+  setIsRecording(false);
+  // Mock transcribed text for demo
+  const mockText = 'Hello, how are you today?';
+  setTranscribedText(mockText);
+  
+  // Immediately fetch translation
+  if (mockText) {
+    fetchTranslation(mockText);
+  }
+};
