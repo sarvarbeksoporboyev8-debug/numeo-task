@@ -1,0 +1,13 @@
+const fetchTranslation = async (text: string) => {
+  setIsLoading(true);
+  try {
+    // Stub API call
+    console.log('Calling translation API with text:', text);
+    console.log('Target language:', selectedLanguage);
+    // Response will be handled in next step
+  } catch (err) {
+    setError('Failed to fetch translation');
+  } finally {
+    setIsLoading(false);
+  }
+};
