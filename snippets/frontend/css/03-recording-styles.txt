@@ -1,0 +1,29 @@
+.recording-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+}
+
+.record-button {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.record-button:hover {
+  background-color: #c82333;
+}
+
+.record-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
