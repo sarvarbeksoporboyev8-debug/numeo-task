@@ -1,0 +1,32 @@
+.Translations {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.Translations h2 {
+  color: #333;
+  margin-top: 0;
+}
+
+.Translation {
+  background-color: #f8f9fa;
+  padding: 15px;
+  margin: 10px 0;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.Translation p {
+  margin: 8px 0;
+  color: #333;
+}
+
+.Translation strong {
+  color: #007bff;
+}

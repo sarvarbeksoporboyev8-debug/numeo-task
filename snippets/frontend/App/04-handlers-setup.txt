@@ -1,14 +1,35 @@
-const handleStartRecording = () => {
-  setIsRecording(true);
-  setError(null);
-  console.log('Recording started');
-};
+  const startRecording = async () => {
+    try {
+      setError(null);
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
 
-const handleStopRecording = () => {
-  setIsRecording(false);
-  console.log('Recording stopped');
-};
+      mediaRecorder.ondataavailable = (event) => {
+        audioChunksRef.current.push(event.data);
+      };
 
-const handleLanguageChange = (lang: string) => {
-  setSelectedLanguage(lang);
-};
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+        sendAudioToBackend(audioBlob);
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+      console.log('Recording started');
+    } catch (err) {
+      console.error('Microphone error:', err);
+      setError('Microphone access denied');
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+      setIsRecording(false);
+      setIsLoading(true);
+      console.log('Recording stopped');
+    }
+  };

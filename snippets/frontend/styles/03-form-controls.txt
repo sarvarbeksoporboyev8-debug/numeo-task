@@ -1,0 +1,29 @@
+.controls {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  margin: 20px;
+  text-align: center;
+}
+
+.language-selector {
+  margin-bottom: 20px;
+}
+
+.language-selector label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.language-selector select {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-group {
+  margin: 20px 0;
+}

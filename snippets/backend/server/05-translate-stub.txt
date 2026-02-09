@@ -1,0 +1,28 @@
+// Helper function to transcribe audio using Whisper
+async function transcribeAudio(audioData: string): Promise<string> {
+  if (!process.env.WHISPER_API_KEY) {
+    throw new Error('WHISPER_API_KEY not set');
+  }
+
+  const base64Data = audioData.replace(/^data:audio\/wav;base64,/, '');
+  const audioBuffer = Buffer.from(base64Data, 'base64');
+
+  const form = new FormData();
+  form.append('file', audioBuffer, { filename: 'audio.wav', contentType: 'audio/wav' });
+  form.append('model', 'whisper-1');
+
+  // weak error handling: just let errors propagate raw
+  const response = await axios.post(
+    `${process.env.WHISPER_BASE_URL}/audio/transcriptions`,
+    form,
+    {
+      headers: {
+        'Authorization': `Bearer ${process.env.WHISPER_API_KEY}`,
+        ...form.getHeaders()
+      },
+      timeout: 60000
+    }
+  );
+
+  return response.data.text;
+}

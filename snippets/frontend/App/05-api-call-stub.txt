@@ -1,13 +1,5 @@
-const fetchTranslation = async (text: string) => {
-  setIsLoading(true);
-  try {
-    // Stub API call
-    console.log('Calling translation API with text:', text);
-    console.log('Target language:', selectedLanguage);
-    // Response will be handled in next step
-  } catch (err) {
-    setError('Failed to fetch translation');
-  } finally {
+  const sendAudioToBackend = (audioBlob: Blob) => {
+    // TODO: implement actual socket emit
+    console.log('Would send audio blob, size:', audioBlob.size);
     setIsLoading(false);
-  }
-};
+  };

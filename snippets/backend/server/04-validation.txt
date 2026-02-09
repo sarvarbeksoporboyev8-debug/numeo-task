@@ -1,0 +1,16 @@
+// Debug: Print loaded env vars
+console.log('Environment variables:');
+console.log('  DEEPSEEK_API_KEY:', process.env.DEEPSEEK_API_KEY ? '***' + process.env.DEEPSEEK_API_KEY.slice(-10) : 'NOT SET');
+console.log('  WHISPER_API_KEY:', process.env.WHISPER_API_KEY ? '***' + process.env.WHISPER_API_KEY.slice(-10) : 'NOT SET');
+
+// Helper: language code to name mapping
+const languageMap: { [key: string]: string } = {
+  es: 'Spanish',
+  fr: 'French',
+  de: 'German',
+  zh: 'Chinese',
+  ja: 'Japanese',
+  ko: 'Korean',
+  pt: 'Portuguese',
+  ru: 'Russian'
+};

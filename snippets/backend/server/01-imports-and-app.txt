@@ -1,0 +1,21 @@
+import express from 'express';
+import { createServer } from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import axios from 'axios';
+import path from 'path';
+import fs from 'fs';
+import FormData from 'form-data';
+
+// Load environment variables from .env.local
+const envPath = path.join(__dirname, '../.env.local');
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+  console.log('Loaded .env.local from:', envPath);
+} else {
+  console.warn('.env.local not found at:', envPath);
+}
+
+const app = express();
+const httpServer = createServer(app);

@@ -1,0 +1,40 @@
+  socket.on('audio', async (data) => {
+    console.log('Received audio from client');
+    try {
+      // Step 1: Transcribe audio to text using Whisper
+      const transcribedText = await transcribeAudio(data.audio);
+
+      // Step 2: Translate to target language using DeepSeek
+      const translatedText = await translateText(transcribedText, data.targetLanguage);
+
+      // Step 3: Send results back to client
+      socket.emit('translation', {
+        original: transcribedText,
+        translated: translatedText,
+        language: data.targetLanguage
+      });
+
+      console.log('Translation complete');
+    } catch (error: any) {
+      console.error('Error:', error.message);
+      socket.emit('error', { 
+        message: error.message || 'Translation failed'
+      });
+    }
+  });
+
+// Serve React app on all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
+httpServer.listen(PORT, () => {
+  console.log(`\nServer running on port ${PORT}`);
+  console.log(`Socket.IO server ready`);
+  console.log(`Frontend available at http://localhost:${PORT}`);
+  console.log(`API Keys configured:`, {
+    deepseek: !!process.env.DEEPSEEK_API_KEY,
+    whisper: !!process.env.WHISPER_API_KEY
+  });
+  console.log('');
+});

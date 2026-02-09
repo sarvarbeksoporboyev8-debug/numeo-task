@@ -1,14 +1,9 @@
-// Refactor: Extract handler logic to separate function
-const handleTranslationRequest = async () => {
-  if (!transcribedText) return;
-  
-  setError(null);
-  await fetchTranslation(transcribedText);
-};
-
-// Refactor: Simplify state updates
-const resetTranslation = () => {
-  setTranscribedText('');
-  setTranslatedText('');
-  setError(null);
-};
+    // FIX: use functional updater to avoid stale closure over translations
+    // Previously: setTranslations([data, ...translations])
+    // The old version captured translations from the initial render,
+    // so only the latest translation would ever appear.
+    socket.on('translation', (data: Translation) => {
+      console.log('Translation received:', data);
+      setTranslations(prev => [data, ...prev]);
+      setIsLoading(false);
+    });

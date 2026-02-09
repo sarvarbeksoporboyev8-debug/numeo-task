@@ -1,6 +1,53 @@
-const [isRecording, setIsRecording] = useState(false);
-const [transcribedText, setTranscribedText] = useState('');
-const [translatedText, setTranslatedText] = useState('');
-const [selectedLanguage, setSelectedLanguage] = useState('es');
-const [isLoading, setIsLoading] = useState(false);
-const [error, setError] = useState<string | null>(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [translations, setTranslations] = useState<Translation[]>([]);
+  const [targetLanguage, setTargetLanguage] = useState('es');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [connected, setConnected] = useState(false);
+  
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const socketRef = useRef<any>(null);
+
+  useEffect(() => {
+    const socket = io({
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      reconnectionAttempts: 5
+    });
+
+    socketRef.current = socket;
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+      setConnected(true);
+      setError(null);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from server');
+      setConnected(false);
+    });
+
+    socket.on('translation', (data: Translation) => {
+      console.log('Translation received:', data);
+      setTranslations([data, ...translations]);
+      setIsLoading(false);
+    });
+
+    socket.on('error', (data: any) => {
+      console.error('Server error:', data);
+      setError(data.message || 'Server error');
+      setIsLoading(false);
+    });
+
+    socket.on('connect_error', (error: any) => {
+      console.error('Connection error:', error);
+      setError('Failed to connect to server');
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);

@@ -1,0 +1,35 @@
+.Button {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.Button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.Button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.stop-btn {
+  background-color: #f44336;
+}
+
+.stop-btn:hover {
+  background-color: #da190b;
+}
+
+.loading {
+  margin-top: 15px;
+  color: #667eea;
+  font-weight: bold;
+}

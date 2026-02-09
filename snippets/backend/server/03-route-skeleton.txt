@@ -1,0 +1,18 @@
+// WebSocket connection
+io.on('connection', (socket) => {
+  console.log('Client connected:', socket.id);
+
+  socket.on('audio', async (data) => {
+    console.log('Received audio from client');
+    // TODO: implement transcription and translation
+    socket.emit('translation', {
+      original: 'placeholder',
+      translated: 'placeholder',
+      language: data.targetLanguage
+    });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});

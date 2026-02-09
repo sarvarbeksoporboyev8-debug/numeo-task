@@ -1,13 +1,19 @@
-// Basic layout for the application
+  return (
+    <div className="App">
+      <h1 className="Title">🎤 Voice Translation</h1>
+      
+      <div className="status">
+        {connected ? (
+          <span className="connected">✅ Connected</span>
+        ) : (
+          <span className="disconnected">❌ Disconnected</span>
+        )}
+      </div>
 
-import React from 'react';
+      {error && <div className="error-message">{error}</div>}
 
-const App = () => {
-    return (
-        <div className='app-layout'>
-            {/* Basic Layout */}
-        </div>
-    );
-};
-
-export default App;
+      <div className="controls">
+        <p>Controls will go here</p>
+      </div>
+    </div>
+  );

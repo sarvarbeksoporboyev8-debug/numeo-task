@@ -1,18 +1,18 @@
-const fetchTranslation = async (text: string) => {
-  setIsLoading(true);
-  try {
-    const response = await fetch('http://localhost:3000/api/translate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, targetLanguage: selectedLanguage })
-    });
-    
-    if (!response.ok) throw new Error('Translation failed');
-    const data = await response.json();
-    setTranslatedText(data.translatedText);
-  } catch (err) {
-    setError('Failed to fetch translation');
-  } finally {
-    setIsLoading(false);
-  }
-};
+  const sendAudioToBackend = (audioBlob: Blob) => {
+    if (!connected) {
+      setError('Not connected to server. Please refresh.');
+      setIsLoading(false);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const audioData = reader.result as string;
+      socketRef.current.emit('audio', {
+        audio: audioData,
+        targetLanguage,
+      });
+      console.log('Audio sent to backend');
+    };
+    reader.readAsDataURL(audioBlob);
+  };
